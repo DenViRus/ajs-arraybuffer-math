@@ -5,7 +5,7 @@ export class MathCharacter extends Character {
     super(name);
     this.stoned = false;
     this.attack = null;
-    this.distance = !this.distance || Number(this.distance) <= 0 ? 1 : this.distance;
+    this.distance = null;
   }
 
   set stoned(value) {
@@ -21,8 +21,8 @@ export class MathCharacter extends Character {
   }
 
   get attack() {
+    this.distance = (!this.distance || Number(this.distance) <= 0) ? 1 : this.distance;
     this._attack = (this.baseAttack / 100) * (100 - (this.distance - 1) * 10);
-
     if (this.stoned) {
       this._attack -= Math.log2(this.distance) * 5;
     }
